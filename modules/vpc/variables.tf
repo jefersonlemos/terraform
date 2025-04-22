@@ -14,7 +14,7 @@ variable "environment" {
 variable "vpc_cidr" {
     description = "CIDR block for the VPC"
     type        = string
-    default     = "10.0.0.0/16" # Default CIDR block for the VPC
+    default     = "" # Default CIDR block for the VPC
 }
 
 variable "enable_dns_hostnames" {
@@ -29,4 +29,14 @@ variable "enable_dns_support" {
     type        = bool
     default     = true # Default to true
   
+}
+
+#Subnet
+
+variable "routes" {
+  type = map(object({
+    #   vpc_id = string
+      cidr_block = string
+      subnet_type = string
+  }))
 }
