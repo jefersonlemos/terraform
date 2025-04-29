@@ -12,3 +12,18 @@ output "vpc_arn" {
 }
 
 #SUBNETS
+output "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  value       = [
+    for subnet in aws_subnet.main :
+    subnet.id if subnet.tags["Subnet_type"] == "private"
+  ]
+}
+
+output "public_subnet_ids" {
+  description = "List of private subnet IDs"
+  value       = [
+    for subnet in aws_subnet.main :
+    subnet.id if subnet.tags["Subnet_type"] == "public"
+  ]
+}
