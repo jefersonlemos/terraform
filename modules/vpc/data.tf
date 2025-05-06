@@ -1,5 +1,8 @@
 data "aws_region" "current" {}
 
+##############################
+####       SUBNETS        ####
+##############################
 data "aws_route_tables" "route-private" {
   vpc_id = aws_vpc.main.id
 
@@ -20,4 +23,9 @@ data "aws_route_tables" "route-public" {
     values = ["public"]
   }
   depends_on = [ aws_route_table.public_route_table ]
+}
+
+
+data "aws_availability_zones" "available" {
+  state = "available"
 }
