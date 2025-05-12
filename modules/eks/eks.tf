@@ -22,10 +22,12 @@ module "eks" {
     vpc-cni = {
       most_recent = true
     }
-    ebs-csi-driver = {
-      most_recent = true
+    aws-ebs-csi-driver = {
+      most_recent = false
     }
   }
+
+
 
   vpc_id                   = var.vpc_id
   subnet_ids               = var.subnet_ids
