@@ -14,6 +14,7 @@ module "eks" {
 
 
   #TODO - Turn it into a variable or something that can be dynamically added
+  # a Dynamic block for example
   cluster_addons = {
     coredns = {
       most_recent = true
@@ -46,9 +47,7 @@ module "eks" {
       instance_types = ["t3.large"]
       capacity_type  = "SPOT"
 
-      tags = {
-        ExtraTag = var.extra_tags
-      }
+    tags = try(var.extra_tags, {})
     }
   }
 }

@@ -65,6 +65,7 @@ variable "control_plane_subnet_ids" {
 
 variable "extra_tags" {
   description = "Extra tag to be applied to resources"
-  type        = list(string)
-  default = []
+  type        = any
+  default     = {}
+
 }
