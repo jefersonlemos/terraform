@@ -10,6 +10,8 @@ module "eks" {
   #TODO - Disable this one and add a service role instead this role/group will have me and luis within it
   enable_cluster_creator_admin_permissions = var.enable_cluster_creator_admin_permissions
 
+  access_entries = var.define_admin_users == true ? var.access_entries : null
+
 
   #TODO - Turn it into a variable or something that can be dynamically added
   cluster_addons = {

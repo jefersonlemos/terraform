@@ -28,10 +28,24 @@ variable "cluster_endpoint_public_access" {
   default     = false
 }
 
+#Access
+variable "define_admin_users" {
+  description = "Whether to define admin users"
+  type        = bool
+  default     = false
+  
+}
+
 variable "enable_cluster_creator_admin_permissions" {
   description = "Enable admin permissions for the cluster creator"
   type        = bool
   default = false
+}
+
+variable "access_entries" {
+  description = "Map of access entries to add to the cluster"
+  type        = any
+  default     = {}
 }
 
 variable "vpc_id" {
