@@ -12,7 +12,6 @@ module "eks" {
 
   access_entries = var.define_admin_users == true ? var.access_entries : null
 
-
   #TODO - Turn it into a variable or something that can be dynamically added
   # a Dynamic block for example
   cluster_addons = {
@@ -33,7 +32,6 @@ module "eks" {
   vpc_id                   = var.vpc_id
   subnet_ids               = var.subnet_ids
   control_plane_subnet_ids = var.control_plane_subnet_ids
-
   
   #TODO - Turn it into a variable or something that can be dynamically added
   eks_managed_node_groups = {
@@ -44,7 +42,7 @@ module "eks" {
 
       instance_types = ["t3.large"]
       capacity_type  = "SPOT"
-
+    
       iam_role_additional_policies = {
         ebs_csi = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
       }
@@ -52,6 +50,7 @@ module "eks" {
     }
   }
 }
+
 resource "kubernetes_storage_class" "ebs-gp2" {
   metadata {
     name = "ebs-gp2"
