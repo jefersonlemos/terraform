@@ -45,7 +45,28 @@ module "eks" {
       instance_types = ["t3.large"]
       capacity_type  = "SPOT"
 
+      iam_role_additional_policies = {
+        ebs_csi = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+      }
     tags = try(var.extra_tags, {})
     }
   }
+}
+resource "kubernetes_storage_class" "ebs-gp2" {
+  metadata {
+    name = "ebs-gp2"
+    annotations = {
+      "storageclass.kubernetes.io/is-default-class" = "true"
+    }
+  }
+
+  storage_provisioner     = "kubernetes.io/aws-ebs"
+  volume_binding_mode     = "Immediate"
+  reclaim_policy          = "Delete"
+  allow_volume_expansion  = true
+
+  parameters = {
+    type = "gp2"
+  }
+
 }
