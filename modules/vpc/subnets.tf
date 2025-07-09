@@ -19,6 +19,10 @@ resource "aws_subnet" "main" {
 
 }
 
+#TODO - This is my POC, I tested differente ways to create the subnets
+#Write a little bit about the different ways to create subnets
+
+
 resource "aws_route_table_association" "this" {
   for_each       = var.routes
   subnet_id      = aws_subnet.main[each.value.cidr_block].id
