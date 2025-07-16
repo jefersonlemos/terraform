@@ -16,7 +16,7 @@ adjust kube config
       - eks
       - get-token
       - --role-arn
-      - arn:aws:iam::443370700365:role/EKSAdmin-role
+      - arn:aws:iam::077210449609:role/EKSAdmin-role
       - --cluster-name
       - poc-spring-boot-app-dev
       - --output
