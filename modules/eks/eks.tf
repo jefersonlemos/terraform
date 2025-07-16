@@ -41,7 +41,7 @@ module "eks" {
       desired_size = 1
 
       instance_types = ["t3a.large"]
-      capacity_type  = "SPOT"
+      capacity_type  = "ON_DEMAND"
 
       iam_role_additional_policies = {
         ebs_csi    = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
@@ -76,5 +76,4 @@ resource "kubernetes_storage_class" "ebs-gp2" {
   parameters = {
     type = "gp2"
   }
-
 }
