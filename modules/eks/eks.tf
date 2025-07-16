@@ -66,8 +66,8 @@ resource "kubernetes_storage_class" "ebs-gp2" {
   reclaim_policy         = "Delete"
   allow_volume_expansion = true
 
-  allowed_topologies = {
-    match_label_expressions = {
+  allowed_topologies {
+    match_label_expressions {
       key    = "topology.ebs.csi.aws.com/zone"
       values = ["us-east-1b"]
     }
