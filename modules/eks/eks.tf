@@ -68,10 +68,11 @@ resource "kubernetes_storage_class" "ebs-gp2" {
 
   allowed_topologies = {
     match_label_expressions = {
-      key = "topology.ebs.csi.aws.com/zone"
+      key    = "topology.ebs.csi.aws.com/zone"
       values = ["us-east-1b"]
+    }
   }
-  
+
   parameters = {
     type = "gp2"
   }
