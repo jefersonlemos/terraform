@@ -1,5 +1,6 @@
 module "ec2_instance" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "5.8.0"
 
   for_each = var.ec2_instances
 

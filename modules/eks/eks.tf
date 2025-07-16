@@ -32,7 +32,7 @@ module "eks" {
   vpc_id                   = var.vpc_id
   subnet_ids               = var.subnet_ids
   control_plane_subnet_ids = var.control_plane_subnet_ids
-  
+
   #TODO - Turn it into a variable or something that can be dynamically added
   eks_managed_node_groups = {
     amc-cluster-wg = {
@@ -42,11 +42,13 @@ module "eks" {
 
       instance_types = ["t3.medium"]
       capacity_type  = "SPOT"
-    
+
       iam_role_additional_policies = {
-        ebs_csi = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+        ebs_csi    = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
+        s3_access  = "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+        ec2_access = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
       }
-    tags = try(var.extra_tags, {})
+      tags = try(var.extra_tags, {})
     }
   }
 }
@@ -59,10 +61,10 @@ resource "kubernetes_storage_class" "ebs-gp2" {
     }
   }
 
-  storage_provisioner     = "kubernetes.io/aws-ebs"
-  volume_binding_mode     = "Immediate"
-  reclaim_policy          = "Delete"
-  allow_volume_expansion  = true
+  storage_provisioner    = "kubernetes.io/aws-ebs"
+  volume_binding_mode    = "Immediate"
+  reclaim_policy         = "Delete"
+  allow_volume_expansion = true
 
   parameters = {
     type = "gp2"

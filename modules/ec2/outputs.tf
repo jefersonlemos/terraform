@@ -15,3 +15,12 @@ output "ec2_instance_private_dns" {
     k => inst.private_dns
   }
 }
+
+output "ec2_instance_public_ip" {
+  description = "Public IP of all EC2 instances"
+  value = {
+    for k, inst in module.ec2_instance :
+    k => inst.public_ip
+  }
+  
+}
